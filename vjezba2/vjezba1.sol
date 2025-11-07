@@ -6,7 +6,14 @@ contract StudentRecord {
         string name;
         uint grade;
     }
-
+    address public owner;
+    constructor(){
+        owner = msg.sender;
+    }
+    modifier onlyOwner(){
+        require(msg.sender == owner,"Only owner can change grades");
+        _;
+    }
     mapping(uint => Student) public students;
     uint public count;
 
